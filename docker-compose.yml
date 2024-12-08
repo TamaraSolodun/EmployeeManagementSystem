@@ -1,0 +1,19 @@
+version: '3.9'
+
+services:
+  sqlserver:
+    build:
+      context: .
+      dockerfile: dbdockerfile
+    container_name: sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_PID=Express
+    ports:
+      - "1433:1433"
+    volumes:
+      - sqlserver_data:/var/opt/mssql
+
+volumes:
+  sqlserver_data:
+    driver: local

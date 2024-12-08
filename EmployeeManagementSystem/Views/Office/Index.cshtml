@@ -1,0 +1,29 @@
+@model IEnumerable<EmployeeManagementSystem.Models.OfficeViewModels.OfficeViewModel>
+@{
+    ViewData["Title"] = "Office Management";
+}
+
+<h1>Offices</h1>
+<a asp-action="Create" class="btn btn-primary">Add Office</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var office in Model)
+        {
+            <tr>
+                <td>@office.Id</td>
+                <td>@office.Name</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@office.Id" class="btn btn-warning d-inline">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@office.Id" class="btn btn-danger d-inline">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

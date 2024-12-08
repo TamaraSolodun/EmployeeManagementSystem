@@ -1,0 +1,30 @@
+@model EmployeeManagementSystem.Models.OfficeViewModels.OfficeViewModel
+@{
+    ViewData["Title"] = "Office";
+}
+<h1>Information about @Model.Name</h1>
+<div class="office-info">
+    <p><strong>Location:</strong> @Model.Location</p>
+    <p><strong>Description:</strong> @Model.Description</p>
+</div>
+
+<h2>Employees:</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var employee in Model.Employees)
+        {
+            <tr>
+                <td>@employee.Name</td>
+                <td>@employee.Position</td>
+                <td>@employee.RoleTitle</td>
+            </tr>
+        }
+    </tbody>
+</table>
