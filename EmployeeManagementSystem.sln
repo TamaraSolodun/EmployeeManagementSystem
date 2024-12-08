@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmployeeManagementSystem", "EmployeeManagementSystem\EmployeeManagementSystem.csproj", "{741333DC-A941-4C7A-B570-6060DF15AA01}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DAL", "DAL\DAL.csproj", "{B897E9D4-9E32-4317-A096-8C21291C331B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{9028DEC1-467C-47FE-9EF0-0F8894DBF3BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{741333DC-A941-4C7A-B570-6060DF15AA01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{741333DC-A941-4C7A-B570-6060DF15AA01}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{741333DC-A941-4C7A-B570-6060DF15AA01}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{741333DC-A941-4C7A-B570-6060DF15AA01}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B897E9D4-9E32-4317-A096-8C21291C331B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B897E9D4-9E32-4317-A096-8C21291C331B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B897E9D4-9E32-4317-A096-8C21291C331B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B897E9D4-9E32-4317-A096-8C21291C331B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9028DEC1-467C-47FE-9EF0-0F8894DBF3BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9028DEC1-467C-47FE-9EF0-0F8894DBF3BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9028DEC1-467C-47FE-9EF0-0F8894DBF3BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9028DEC1-467C-47FE-9EF0-0F8894DBF3BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

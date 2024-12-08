@@ -1,4 +1,4 @@
-version: '3.9'
+version: '3.8'
 
 services:
   sqlserver:
@@ -8,9 +8,10 @@ services:
     container_name: sqlserver
     environment:
       - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=bdpass
       - MSSQL_PID=Express
     ports:
-      - "1433:1433"
+      - "1433:1433"  # Map the default SQL Server port
     volumes:
       - sqlserver_data:/var/opt/mssql
 

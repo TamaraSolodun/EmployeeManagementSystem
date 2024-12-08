@@ -1,0 +1,17 @@
+@model API.Models.EmployeeViewModels.EmployeeViewModel
+
+@{
+    ViewData["Title"] = "Delete Employee";
+}
+
+<h1>Delete Employee</h1>
+<p>Are you sure you want to delete the following employee?</p>
+<div>
+    <strong>Name:</strong> @Model.Name <br />
+</div>
+
+<form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
+    @Html.AntiForgeryToken()
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
