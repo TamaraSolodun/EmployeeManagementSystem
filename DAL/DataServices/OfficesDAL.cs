@@ -17,7 +17,9 @@ namespace DAL.DataServices
             var query = _context.Offices.AsQueryable();
             if (includeEployeesData)
             {
-                query = query.Include(office => office.Employees).ThenInclude(employee => employee.Role);
+                query = query.Include(office => office.Employees)
+                            .ThenInclude(employee => employee.EmployeeRoles)
+                            .ThenInclude(er => er.Role);
             }
             return await query.FirstOrDefaultAsync(office => office.Id == id);
         }

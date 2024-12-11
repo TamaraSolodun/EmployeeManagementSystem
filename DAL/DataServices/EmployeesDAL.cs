@@ -15,16 +15,19 @@ namespace DAL.DataServices
         public async Task<Employee> GetEmployeeAsync(int id)
         {
             return await _context.Employees
-                .Include(employee => employee.Role)
                 .Include(employee => employee.Office)
+                 .Include(employee => employee.EmployeeRoles)
+                    .ThenInclude(er => er.Role)
                 .FirstOrDefaultAsync(employee => employee.Id == id);
         }
+
 
         public async Task<List<Employee>> GetEmployeesAsync(int? officeId = null)
         {
             return await _context.Employees
                 .Where(employee => (!officeId.HasValue || employee.OfficeId == officeId))
-                .Include(employee => employee.Role)
+                .Include(employee => employee.EmployeeRoles)
+                    .ThenInclude(er => er.Role)
                 .Include(employee => employee.Office)
                 .ToListAsync();
         }

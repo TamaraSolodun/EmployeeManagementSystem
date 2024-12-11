@@ -9,5 +9,6 @@ namespace DAL.Interfaces
         Task<Employee> CreateEmployeeAsync(Employee employee);
         Task DeleteEmployeeAsync(Employee employeeToDelete);
         Task<Employee> UpdateEmployeeAsync(Employee employee);
+
     }
 }

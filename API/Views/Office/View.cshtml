@@ -14,7 +14,7 @@
         <tr>
             <th>Name</th>
             <th>Position</th>
-            <th>Role</th>
+            <th>Roles</th>
         </tr>
     </thead>
     <tbody>
@@ -23,7 +23,7 @@
             <tr>
                 <td>@employee.Name</td>
                 <td>@employee.Position</td>
-                <td>@employee.RoleTitle</td>
+                <td>@string.Join(", ", employee.RoleTitles)</td>
             </tr>
         }
     </tbody>

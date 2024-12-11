@@ -1,10 +1,9 @@
-using AutoMapper;
-using DAL;
-using DAL.Interfaces;
-using DAL.Models;
 using API.Models;
 using API.Models.EmployeeViewModels;
 using API.Models.OfficeViewModels;
+using AutoMapper;
+using DAL.Interfaces;
+using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -44,7 +43,11 @@ namespace API.Controllers
         {
             var roles = await _rolesDAL.GetRolesAsync();
             var offices = await _officesDAL.GetOfficesAsync();
-            var vm = new CreateEmployeeRequest();
+            var vm = new CreateEmployeeRequest
+            {
+                RoleIds = new List<int>()
+            };
+
             ViewBag.Roles = _mapper.Map<List<RoleViewModel>>(roles);
             ViewBag.Offices = _mapper.Map<List<OfficeViewModel>>(offices);
             return View(vm);
@@ -54,14 +57,20 @@ namespace API.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateEmployeeRequest employeeRequest)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var employee = _mapper.Map<Employee>(employeeRequest);
-                await _employeesDAL.CreateEmployeeAsync(employee);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Create));
             }
 
-            return RedirectToAction(nameof(Create)); ;
+            var employee = _mapper.Map<Employee>(employeeRequest);
+            if (employeeRequest.RoleIds != null && employeeRequest.RoleIds.Any())
+            {
+                employee.EmployeeRoles = employeeRequest.RoleIds
+                    .Select(roleId => new EmployeeRole { RoleId = roleId })
+                    .ToList();
+            }
+            await _employeesDAL.CreateEmployeeAsync(employee);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: /Employees/Edit/{id}
@@ -76,6 +85,7 @@ namespace API.Controllers
             var roles = await _rolesDAL.GetRolesAsync();
             var offices = await _officesDAL.GetOfficesAsync();
             var vm = _mapper.Map<EditEmployeeRequest>(employee);
+            vm.RoleIds = employee.EmployeeRoles?.Select(er => er.RoleId).ToList() ?? new List<int>();
             ViewBag.Roles = _mapper.Map<List<RoleViewModel>>(roles);
             ViewBag.Offices = _mapper.Map<List<OfficeViewModel>>(offices);
 
@@ -87,17 +97,23 @@ namespace API.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, EditEmployeeRequest employeeRequest)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var employee = _mapper.Map<Employee>(employeeRequest);
-                employee.Id = id;
-                await _employeesDAL.UpdateEmployeeAsync(employee);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Edit), new { id });
             }
-            ViewBag.Roles = await _rolesDAL.GetRolesAsync();
-            ViewBag.Offices = await _officesDAL.GetOfficesAsync();
 
-            return View(employeeRequest);
+            var employee = await _employeesDAL.GetEmployeeAsync(id);
+            employee.Name = employeeRequest.Name;
+            employee.Position = employeeRequest.Position;
+            employee.OfficeId = employeeRequest.OfficeId;
+            if (employeeRequest.RoleIds != null)
+            {
+                employee.EmployeeRoles = employeeRequest.RoleIds
+                    .Select(roleId => new EmployeeRole() { RoleId = roleId, EmployeeId = id })
+                    .ToList();
+            }
+            await _employeesDAL.UpdateEmployeeAsync(employee);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: /Employees/Delete/5

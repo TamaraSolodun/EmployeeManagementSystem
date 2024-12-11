@@ -34,15 +34,14 @@
     </div>
 
     <div class="form-group">
-        <label asp-for="RoleId">Role</label>
-        <select asp-for="RoleId" class="form-control">
-            <option value="">Select Role</option>
-            @foreach (var role in ViewBag.Roles)
+        <label for="Roles">Roles</label>
+        <select id="Roles" name="RoleIds" class="form-control" multiple>
+            @foreach (var role in ViewBag.Roles as List<RoleViewModel>)
             {
-                <option value="@role.Id" selected="@(role.Id == Model.RoleId)">@role.Title</option>
+                <option value="@role.Id" selected=@(Model.RoleIds.Contains(role.Id))>@role.Title</option>
             }
         </select>
-        <span asp-validation-for="RoleId" class="text-danger"></span>
+        <span asp-validation-for="RoleIds" class="text-danger"></span>
     </div>
 
     <button type="submit" class="btn btn-success">Save Changes</button>

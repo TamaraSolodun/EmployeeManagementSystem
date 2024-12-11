@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using DAL.Models;
 
 namespace API.Models.EmployeeViewModels
 {
@@ -12,7 +11,7 @@ namespace API.Models.EmployeeViewModels
         public string Position { get; set; }
         public int? OfficeId { get; set; }
         public string? OfficeTitle { get; set; }
-        public int RoleId { get; set; }
-        public string RoleTitle { get; set; }
+        public List<int> RoleIds { get; set; } = new List<int>();
+        public List<string> RoleTitles { get; set; } = new List<string>();
     }
 }

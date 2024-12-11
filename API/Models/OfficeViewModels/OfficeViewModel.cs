@@ -11,6 +11,6 @@ namespace API.Models.OfficeViewModels
         public string Name { get; set; }
         public string Location { get; set; }
         public string Description { get; set; }
-        public List<EmployeeViewModel>? Employees { get; set; }
+        public List<EmployeeViewModel>? Employees { get; set; } = new List<EmployeeViewModel>();
     }
 }

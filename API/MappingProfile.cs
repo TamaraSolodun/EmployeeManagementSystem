@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using DAL.Models;
-using API.Models;
+﻿using API.Models;
 using API.Models.EmployeeViewModels;
 using API.Models.OfficeViewModels;
+using AutoMapper;
+using DAL.Models;
 
 namespace API
 {
@@ -14,11 +14,12 @@ namespace API
 
             CreateMap<Employee, EmployeeViewModel>()
                 .ForMember(dest => dest.OfficeTitle, opt => opt.MapFrom(src => src.Office != null ? src.Office.Name : null))
-                .ForMember(dest => dest.RoleTitle, opt => opt.MapFrom(src => src.Role != null ? src.Role.Title : null));
+                .ForMember(dest => dest.RoleIds, opt => opt.MapFrom(src => src.EmployeeRoles.Select(er => er.RoleId)))
+                .ForMember(dest => dest.RoleTitles, opt => opt.MapFrom(src => src.EmployeeRoles.Select(er => er.Role.Title)));
 
             CreateMap<EmployeeViewModel, Employee>()
                 .ForMember(dest => dest.Office, opt => opt.Ignore())
-                .ForMember(dest => dest.Role, opt => opt.Ignore());
+                .ForMember(dest => dest.EmployeeRoles, opt => opt.MapFrom(src => src.RoleIds.Select(roleId => new EmployeeRole { RoleId = roleId })));
 
             CreateMap<Office, OfficeViewModel>().ReverseMap();
 

@@ -13,7 +13,7 @@
                 <th>Name</th>
                 <th>Position</th>
                 <th>Office</th>
-                <th>Role</th>
+                <th>Roles</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -25,7 +25,9 @@
                     <td>@employee.Name</td>
                     <td>@employee.Position</td>
                     <td>@employee.OfficeTitle</td>
-                    <td>@employee.RoleTitle</td>
+                    <td>
+                        @string.Join(", ", employee.RoleTitles)
+                    </td>
                     <td>
                         <!-- Edit Form -->
                         <a asp-action="Edit" asp-route-id="@employee.Id" class="btn btn-warning d-inline">Edit</a>

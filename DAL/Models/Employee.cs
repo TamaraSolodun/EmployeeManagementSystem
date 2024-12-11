@@ -10,7 +10,7 @@ namespace DAL.Models
         public string Position { get; set; }
         public int? OfficeId { get; set; }
         public Office Office { get; set; }
-        public int RoleId { get; set; }
-        public Role Role {  get; set; }
+        public ICollection<EmployeeRole> EmployeeRoles { get; set; } = new List<EmployeeRole>();
+
     }
 }
